@@ -1,0 +1,220 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="{% static 'css/Stiulus.css' %}">
+    <script>
+        function siteelcomMessage(messages, index) {if (index < messages.length){
+                var textObj = messages[index];
+                var displayTime = textObj.time 
+                var delayTime = textObj.delay
+
+                var welcomeMessage = document.createElement('div');
+                welcomeMessage.className = 'floating-welcome-message';
+                welcomeMessage.textContent = textObj.text;
+                document.body.appendChild(welcomeMessage);
+                
+            if (textObj.position) {
+                welcomeMessage.style.top = textObj.position.top;
+                welcomeMessage.style.left = textObj.position.left;
+            } else {
+                welcomeMessage.style.top = '50%';
+                welcomeMessage.style.left = '50%';
+                welcomeMessage.style.transform = 'translate(-50%, -50%)';
+            }
+
+            if (textObj.arrow) {
+                var arrow = document.createElement('div');
+                arrow.className = 'arrow ' + textObj.arrow.direction;
+                arrow.style.top = textObj.arrow.top;
+                arrow.style.left = textObj.arrow.left;
+                welcomeMessage.appendChild(arrow);
+        }
+                // Mostra a mensagem de boas-vindas
+                setTimeout(function () {
+                    welcomeMessage.classList.add('visible');
+                }, 500 - delayTime); // Delay para exibir a mensagem
+
+                // Esconde a mensagem de boas-vindas após alguns segundos
+                setTimeout(function () {
+                    welcomeMessage.classList.remove('visible');
+                }, displayTime); // Duração da mensagem visível (3500 ms)
+
+                // Remove a mensagem do DOM após a transição
+                setTimeout(function () {
+                    document.body.removeChild(welcomeMessage);
+                    siteelcomMessage(messages, index + 1)
+                }, displayTime + 500); // Tempo total (4000 ms)
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {// Cria a mensagem de boas-vindas
+            // Remove a mensagem do DOM após a transição
+            var messages = [
+                { text: "Olá! Seja bem-vindo ao meu site!", time: 3000, delay: 1000, position: {top: "95%", left: "50%"}},
+                { text: "Digo...", time: 2000, delay: 0, position: {top: "95%", left: "50%"}},
+                { text: "Nosso site!", time: 3000, delay: 0, position: {top: "95%", left: "50%"}},
+                { text: "Da empresa...", time: 3000, delay: 0, position: {top: "95%", left: "50%"}},
+                { text: "Desculpe... vamos tentar de novo.", time: 4000, delay: 0, position: {top: "70%", left: "50%"}},
+                { text: "Seja bem-vindo ao Etical EnterPrizes!", time: 4000, delay: 0, position: {top: "95%", left: "50%"}},
+                { text: "Onde seu conforto é nossa alegria! (e salário)", time: 5000, delay: 200, position: {top: "95%", left: "50%"}}, // Última mensagem com mais tempo
+                { text: "Abaixo temos nosso aclamado ChatBot!", time: 3000, delay: 0, position: {top: "80%", left: "85%"}},
+                { text: "Feito exclusivamente para te guiar em seu mar de dúvidas!", time: 5000, delay: 0, position: {top: "80%", left: "95%"}},
+                { text: "Sinta-se a vontade para perguntar algo.", time: 3000, delay: 0, position: {top: "80%", left: "90%"}},
+                { text: "Aqui, acima, temos sua barra de navegação!", time: 3000, delay: 0, position: {top: "20%", left: "50%"}},
+                { text: "Use-a para... navegar pelo site!", time: 4000, delay: 0, position: {top: "20%", left: "50%"}},
+                { text: "WoW, isso foi meio óbvio demais, eu sei.", time: 3000, delay: 200, position: {top: "20%", left: "50%"}},
+                { text: "Mas eu sou só um estagiário, ok?", time: 3000, delay: 200, position: {top: "20%", left: "50%"}}
+   
+            ];
+            siteelcomMessage(messages, 0);
+
+        });
+
+
+        function sendMessage() {
+            var messageInput = document.getElementById('messageInput');
+            var chatbotMessages = document.getElementById('chatbotMessages');
+
+            var userMessage = document.createElement('div');
+            userMessage.textContent = 'Você: ' + messageInput.value;
+            chatbotMessages.appendChild(userMessage);
+
+            // Limpar o campo de entrada
+            messageInput.value = '';
+
+            // Resposta de exemplo do chatbot (substituir pela lógica real)
+            var botMessage = document.createElement('div');
+            botMessage.textContent = 'Chatbot: Esta é uma resposta de exemplo.';
+            chatbotMessages.appendChild(botMessage);
+
+            // Rolagem automática para a mensagem mais recente
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function toggleChatbot() {
+            var uelcom = document.createElement('div');
+            var chatbotContainer = document.getElementById('chatBotContainer');
+            if (chatbotContainer.style.display === 'none' || chatbotContainer.style.display === '') {
+                chatbotContainer.style.display = 'flex';
+
+                // Array com mensagens de boas-vindas
+                var welcomeMessages = [
+                    "Olá! Seja bem-vindo!",
+                    "Como posso ajudar hoje?",
+                    "Estou aqui para responder suas perguntas!"
+                ];
+
+                function sendWelcomeMessages(messages, index) {if (index < messages.length) {
+                var messageDiv = document.createElement('div');
+                messageDiv.textContent = 'Chatbot: ' + messages[index];
+                chatbotMessages.appendChild(messageDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+                // Próxima mensagem após 2 segundos (2000 milissegundos)
+                setTimeout(function() {
+                    sendWelcomeMessages(messages, index + 1);
+                }, 2000); // Intervalo de 2000 ms (2 segundos)
+            }
+        }
+
+        // Iniciar envio das mensagens de boas-vindas após 1 segundo (1000 milissegundos)
+        setTimeout(function() {
+            sendWelcomeMessages(welcomeMessages, 0);
+        }, 500); // Aguarda 1 segundo antes de iniciar
+
+            } else {
+                chatbotContainer.style.display = 'none';
+            }
+        }
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('chatbotForm').onsubmit = function(e) {
+                e.preventDefault();
+                var messageInput = document.getElementById('messageInput');
+                var chatbotResponse = document.getElementById('chatbotResponse');
+
+                fetch('/polls/chatbot/', {  // Corrigido para a URL correta
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    },
+                    body: new FormData(this)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var botMessage = document.createElement('div');
+                    botMessage.textContent = 'Chatbot: ' + data.response;
+                    chatbotMessages.appendChild(botMessage);
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                });
+                messageInput.value = ''; // Limpar o campo de mensagem após o envio
+            };
+        });
+    </script>
+</head>
+<body>
+
+
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#services">Serviços</a>
+        <a href="#about">Sobre nós</a>
+        <a href="#chatbot" onclick="toggleChatbot()">Indeciso?</a>
+    </div>
+        
+    
+    <img class="bannerup" src={% static 'images-site/apresentacaobaner.jpg' %}>
+
+    
+    <div class="conteiner-principal">
+        <section id="about">
+            <h1>Sobre nós:</h1>
+        </section>
+        
+        <p>A Etical EnterPrize é uma empresa líder em proporcionar conforto excepcional. Nossa missão é transformar espaços comuns em ambientes acolhedores e convidativos que promovam a satisfação do cliente.</p>
+        
+        <p>Fundada com a visão de elevar a experiência do cliente a novos patamares, a Etical EnterPrize se dedica a criar ambientes que não apenas atendam, mas superem as expectativas dos clientes. Trabalhamos em estreita colaboração com nossos clientes para entender suas necessidades e desejos, e então usamos essa compreensão para criar espaços que refletem sua marca e valores.</p>
+        
+        <p>Nossa equipe de especialistas altamente qualificados e dedicados está sempre pronta para enfrentar novos desafios. Eles trazem consigo uma riqueza de experiência e um compromisso inabalável com a excelência.</p>
+        
+        <p>Na Etical EnterPrize, acreditamos que um ambiente confortável pode fazer toda a diferença na experiência do cliente. É por isso que nos esforçamos para garantir que cada detalhe seja perfeito. Do design inicial à execução final, nosso foco está em criar espaços que deixem uma impressão duradoura.</p>
+        
+        <p>Escolher a Etical EnterPrize significa escolher conforto, qualidade e uma experiência inigualável. Estamos ansiosos para trabalhar com você para criar o ambiente perfeito para seus clientes.</p>
+        
+        <section id="home">
+            <h1>Exemplo de CSS</h1>
+        </section>
+        
+        <p class="destaque">Este parágrafo está em destaque.</p>
+        <p>Este parágrafo não está em destaque.</p>
+    </div>
+    
+    
+    <button class="chatbot-button" onclick="toggleChatbot()">Chatbot</button>
+    
+    
+    <div class="chat-bot-conteiner" id="chatBotContainer">
+        <div class="chatbot-header">
+            Chatbot
+        </div>
+        
+        <div class="chat-bot-response" id="chatbotMessages"
+             id="chatbotResponse">
+        </div>
+        
+        <div class="chat-bot-input">
+            <form method="post" id="chatbotForm">
+                {% csrf_token %}
+                <input type="text" name="message" id="messageInput" placeholder="Digite sua pergunta">
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>
