@@ -6,37 +6,13 @@ import unicodedata
 import string
 faq = {
     # Horário de atendimento
-    ("horario atendimento", "horario atendimento", "horas atendimento", "horas atendimento"):
-        "O horário de atendimento varia de unidade para unidade." + " Por favor, especifique a unidade em sua pergunta.",
-
-    # Sedes no Brasil
-    ("endereço sedes brasil", "endereço sedes empresa", "endereço sedes empresa"):
-        "A Etical Enterprises tem 2 sedes espalhadas pelo Brasil. Uma no Rio de Janeiro e uma no Ceará.",
-
-    # Rio de Janeiro - São Gonçalo - Localização
-    ("endereço sede rio de janeiro", "endereço sede empresa rio de janeiro", "endereço rio de janeiro sede",
-     "endereço sede sao gonçalo", "endereço sede empresa sao gonçalo", "endereço sao gonçalo sede"):
-        "A sede do Rio de Janeiro fica na cidade de São Gonçalo, Rua De Leonardo Pravo, N* 1500, Nerlin, São Gonçalo.",
-
-    # Rio de Janeiro - São Gonçalo - Horários
-    ("horario sede rio janeiro", "horario sede rio janeiro", "horario atendimento rio janeiro", "horario rio janeiro",
-     "horario sede sao gonçalo", "horario atendimento sao gonçalo", "horário sao gonçalo"):
-        "O horário de funcionamento da sede no Rio de Janeiro na cidade de São Gonçalo é das 9:00 até as 19:00 horas.",
-
-    # Ceará - Fortaleza - Local
-    ("endereço sede ceara", "endereço sede empresa ceara", "endereço ceara sede",
-     "endereço sede fortaleza", "endereço sede empresa fortaleza", "endereço fortaleza sede"):
-        "A sede do Ceará fica na cidade de Fortaleza, Rua Leopodina da Assunção, N* 472, Aldeota, Fortaleza.",
-
-    # Ceará - Fortaleza - Horários
-    ("horario sede fortaleza", "horário atendimento sede fortaleza", "horario fortaleza",
-     "horario sede ceara", "horário atendimento sede ceara", "horario ceara"):
-        "O horário de funcionamento da sede em fortaleza é das 9:00 até as 19:00 horas.",
+    ("Key"):
+        "Resposta correspondente a essa Key",
+    ("Key2"):
+        "Resposta correspondente a essa Key",
+    ("Key3"):
+        "Resposta correspondente a essa Key",
 }
-
-
-def retirar_acento(texto):
-    return "".join(c for c in unicodedata.normalize('NFD', texto) if unicodedata.category(c) != 'Mn')
 
 #Função principal que encontra a melhor resposta para a pergunta feita baseada na similaridade de texto.
 def encontrar_resposta(pergunta):
