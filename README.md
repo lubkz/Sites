@@ -80,4 +80,4 @@ Essa lógica básica de NLP (Processamento de Linguagem Natural) **não usa mode
 
 📂 Linguagem: Python  
 🧠 Conceitos: Backend, NLP artesanal, lógica, Django  
-💻 Ferramentas: VSCode, ChatGPT (como suporte técnico), navegador
+💻 Ferramentas: PyCharm
