@@ -26,6 +26,7 @@ Desde então, evoluí o sistema com mais calma, melhorando a estrutura do códig
 ### 🧠 Como o interpretador funciona
  
 O coração deste projeto é uma função chamada `encontrar_resposta`, que simula um ChatBot simples utilizando **análise de similaridade textual**. A lógica funciona da seguinte forma:
+
  
 1.  
 **Pré-processamento da pergunta:**
